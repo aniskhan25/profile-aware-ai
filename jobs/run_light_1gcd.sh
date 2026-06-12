@@ -8,8 +8,6 @@
 #SBATCH --gpus-per-node=1
 #SBATCH --mem-per-gpu=60G
 #SBATCH --time=00:30:00
-#SBATCH --output=logs/%x_%j.out
-#SBATCH --error=logs/%x_%j.err
 
 set -euo pipefail
 
