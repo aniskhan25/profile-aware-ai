@@ -109,7 +109,7 @@ $PROFILE_DIR/report.html
 $PROFILE_DIR/analysis.json
 ```
 
-Open `report.html` in a browser for time-series plots and a findings summary.
+Copy `report.html` to your local machine to view it in a browser.
 
 Interpretation:
 
@@ -274,7 +274,7 @@ Rule-based findings derived from `summary.json`. Each finding has a severity, a 
 
 **`report.html`**
 
-A self-contained HTML file with time-series plots, per-GPU tables, and the analysis findings. Open it locally in any browser — no server required.
+A self-contained HTML file with time-series plots, per-GPU tables, and the analysis findings. Copy it from LUMI to your local machine and open in any browser — no server required.
 
 ## Repository Layout
 
