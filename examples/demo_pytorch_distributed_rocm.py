@@ -6,9 +6,10 @@ import time
 import torch
 import torch.distributed as dist
 
-SECONDS = 60
-SIZE    = 2048
-DTYPE   = torch.float16
+SECONDS    = 60
+SIZE       = 2048
+DTYPE      = torch.float16
+RESERVE_GB = 20.0
 
 rank       = int(os.environ["SLURM_PROCID"])
 local_rank = int(os.environ["SLURM_LOCALID"])
@@ -23,6 +24,9 @@ torch.cuda.set_device(local_rank)
 device = torch.device(f"cuda:{local_rank}")
 
 dist.init_process_group(backend="nccl", init_method="env://")
+
+_bytes = int(RESERVE_GB * 1024 ** 3)
+_reserved = torch.empty(_bytes // 2, device=device, dtype=torch.float16)
 
 if rank == 0:
     print(f"world_size={world_size}", flush=True)
