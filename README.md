@@ -101,7 +101,7 @@ Profile report: /scratch/project_462000131/<user>/lumi-profile/<jobid>/report.md
 Profile report: /scratch/project_462000131/<user>/lumi-profile/<jobid>/report.html
 ```
 
-Copy `report.html` to your local machine to view it in a browser.
+Read `report.md` directly on LUMI to review the findings.
 
 Interpretation:
 
@@ -264,9 +264,9 @@ Rule-based findings derived from `summary.json`. Each finding has a severity, a 
 }
 ```
 
-**`report.html`**
+**`report.md` / `report.html`**
 
-A self-contained HTML file with time-series plots, per-GPU tables, and the analysis findings. Copy it from LUMI to your local machine and open in any browser — no server required.
+The markdown report is readable directly on LUMI with `cat` or any pager. The HTML version contains the same content with plots — copy it to your local machine to open in a browser.
 
 ## Repository Layout
 
