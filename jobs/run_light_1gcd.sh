@@ -12,7 +12,7 @@
 #SBATCH --error=logs/%x_%j.err
 
 LUMI_CONTAINER_IMAGE=${LUMI_CONTAINER_IMAGE:-/appl/local/laifs/containers/lumi-multitorch-latest.sif}
-PROFILER_DIR=${PROFILER_DIR:-$SCRATCH/lumi-job-profiler}
+PROFILER_DIR=${PROFILER_DIR:-/scratch/project_462000131/anisrahm/lumi-job-profiler}
 
 source "$PROFILER_DIR/scripts/profile_hook.sh"
 

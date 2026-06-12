@@ -53,7 +53,7 @@ This tutorial covers single-node profiling. For multi-node variants, see the `--
 The profiling hook and analysis tools live in [lumi-job-profiler](https://github.com/aniskhan25/lumi-job-profiler). Clone it to scratch before submitting any job:
 
 ```bash
-git clone https://github.com/aniskhan25/lumi-job-profiler.git $SCRATCH/lumi-job-profiler
+git clone https://github.com/aniskhan25/lumi-job-profiler.git /scratch/project_462000131/$USER/lumi-job-profiler
 ```
 
 The demo workloads referenced in the job scripts come from that repository. No additional installation is required.

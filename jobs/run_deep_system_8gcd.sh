@@ -12,7 +12,7 @@
 #SBATCH --error=logs/%x_%j.err
 
 LUMI_CONTAINER_IMAGE=${LUMI_CONTAINER_IMAGE:-/appl/local/laifs/containers/lumi-multitorch-full.sif}
-PROFILER_DIR=${PROFILER_DIR:-$SCRATCH/lumi-job-profiler}
+PROFILER_DIR=${PROFILER_DIR:-/scratch/project_462000131/anisrahm/lumi-job-profiler}
 
 export MASTER_ADDR=$(scontrol show hostnames "$SLURM_JOB_NODELIST" | head -n 1)
 export MASTER_PORT=29500
