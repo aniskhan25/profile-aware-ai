@@ -209,18 +209,20 @@ Submit the deep-system job:
 sbatch jobs/run_deep_system_8gcd.sh
 ```
 
-Expected output shape:
+Expected output shape at the end of the Slurm log:
 
 ```text
-PROFILE_DIR=$SCRATCH/profile_462000131_<jobid>
-PROFILE_MODE=deep-system
-
-rocprofiler-systems trace written to:
-  $PROFILE_DIR/deep_system/
-  $PROFILE_DIR/deep_system/manifest.json
+Deep system summary:  /scratch/project_462000131/<user>/lumi-profile/<jobid>/deep_profile/system/summary.json
+Profile summary:      /scratch/project_462000131/<user>/lumi-profile/<jobid>/summary.json
+Profile analysis:     /scratch/project_462000131/<user>/lumi-profile/<jobid>/analysis.json
+Profile report:       /scratch/project_462000131/<user>/lumi-profile/<jobid>/report.md
+Profile report:       /scratch/project_462000131/<user>/lumi-profile/<jobid>/report.html
 ```
 
-Load the trace in [Perfetto](https://ui.perfetto.dev) by opening the `.proto` file from `$PROFILE_DIR/deep_system/`.
+The raw per-rank Perfetto traces are under `deep_profile/system/raw/<node>/rank-N/`. Load any `.proto` file in [Perfetto](https://ui.perfetto.dev).
+
+> [!NOTE]
+> deep-system uses the ROCm 6.4 container (`lumi-multitorch-full-u24r64f21m43t29-*`) because rocprofiler-systems was built against ROCm 6.x sonames. The other profiling modes use `lumi-multitorch-latest.sif`.
 
 What to look for:
 
