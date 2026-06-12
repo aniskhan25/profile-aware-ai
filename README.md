@@ -234,7 +234,7 @@ What to look for:
 | CPU thread contention | GIL hold or dataloader worker stall | Increase dataloader workers or use persistent workers |
 
 > [!WARNING]
-> Deep-system profiling has high overhead and produces large trace files. Use a very short run — 10 to 30 seconds. Only reach for this mode when light and deep-trace have not identified the bottleneck.
+> Deep-system profiling has high overhead and produces large trace files (~1 GB per rank per 30 seconds). Use at most 10–15 seconds. Only reach for this mode when light and deep-trace have not identified the bottleneck.
 
 ## Reading the Reports
 

@@ -45,4 +45,4 @@ DEMO="${SLURM_SUBMIT_DIR}/examples/demo_pytorch_distributed_rocm.py"
 
 profile_run_distributed -- \
   srun --nodes=1 --ntasks-per-node=8 --cpu-bind=none -- \
-  python3 "${DEMO}" --seconds 30 --size 2048 --dtype fp16
+  python3 "${DEMO}" --seconds 10 --size 2048 --dtype fp16
