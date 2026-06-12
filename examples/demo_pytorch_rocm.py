@@ -4,12 +4,17 @@
 import time
 import torch
 
-SECONDS = 60
-SIZE    = 4096
-DTYPE   = torch.float16
+SECONDS      = 60
+SIZE         = 4096
+DTYPE        = torch.float16
+RESERVE_GB   = 20.0
 
 device = torch.device("cuda:0")
 torch.cuda.set_device(device)
+
+# Reserve a fixed block of VRAM so memory utilisation appears in the profile.
+_bytes = int(RESERVE_GB * 1024 ** 3)
+_reserved = torch.empty(_bytes // 2, device=device, dtype=torch.float16)
 
 a = torch.randn((SIZE, SIZE), device=device, dtype=DTYPE)
 b = torch.randn((SIZE, SIZE), device=device, dtype=DTYPE)
