@@ -25,8 +25,8 @@ mkdir -p "$TORCH_HOME"
 
 export LUMI_CONTAINER_IMAGE="${LUMI_CONTAINER_IMAGE:-/appl/local/laifs/containers/lumi-multitorch-latest.sif}"
 export LUMI_CONTAINER_USE_ROCM=0
-export SINGULARITY_BIND="${SINGULARITY_BIND:+${SINGULARITY_BIND},}/usr/lib64:/opt/hostlibs,/opt/rocm-6.3.4/lib/librocprofiler-sdk.so.0:/opt/hostlibs/librocprofiler-sdk.so.0,/opt/rocm-6.3.4/lib/libamd_smi.so.25:/opt/hostlibs/libamd_smi.so.25"
-export SINGULARITYENV_LD_LIBRARY_PATH="/opt/hostlibs"
+export SINGULARITY_BIND="${SINGULARITY_BIND:+${SINGULARITY_BIND},}/usr/lib64:/opt/hostlibs,/opt/rocm-6.3.4/lib:/opt/rocm6libs"
+export SINGULARITYENV_LD_LIBRARY_PATH="/opt/hostlibs:/opt/rocm6libs"
 
 PROFILER_DIR="${PROFILER_DIR:-/scratch/project_462000131/anisrahm/lumi-job-profiler}"
 
