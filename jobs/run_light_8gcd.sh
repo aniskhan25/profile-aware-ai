@@ -11,6 +11,8 @@
 #SBATCH --output=logs/%x_%j.out
 #SBATCH --error=logs/%x_%j.err
 
+set -euo pipefail
+
 module purge
 module use /appl/local/laifs/modules
 module load lumi-aif-singularity-bindings
@@ -22,21 +24,22 @@ export MIOPEN_USER_DB=$MIOPEN_DIR/config
 export TORCH_HOME="/scratch/${SLURM_JOB_ACCOUNT}/${USER}/torch_home"
 mkdir -p "$TORCH_HOME"
 
-LUMI_CONTAINER_IMAGE=${LUMI_CONTAINER_IMAGE:-/appl/local/laifs/containers/lumi-multitorch-latest.sif}
-PROFILER_DIR=${PROFILER_DIR:-/scratch/project_462000131/anisrahm/lumi-job-profiler}
+CONTAINER_IMAGE_DEFAULT="/appl/local/laifs/containers/lumi-multitorch-u24r64f21m43t29-20260225_144743/lumi-multitorch-full-u24r64f21m43t29-20260225_144743.sif"
+export LUMI_CONTAINER_IMAGE="${LUMI_CONTAINER_IMAGE:-${CONTAINER_IMAGE_DEFAULT}}"
 
-export MASTER_ADDR=$(scontrol show hostnames "$SLURM_JOB_NODELIST" | head -n 1)
-export MASTER_PORT=29500
+PROFILER_DIR="${PROFILER_DIR:-/scratch/project_462000131/anisrahm/lumi-job-profiler}"
 
-source "$PROFILER_DIR/scripts/profile_hook.sh"
+export MASTER_ADDR="${MASTER_ADDR:-$(scontrol show hostnames "${SLURM_JOB_NODELIST}" | head -n 1)}"
+export MASTER_PORT="${MASTER_PORT:-29500}"
 
-DEMO=${DEMO:-$PROFILER_DIR/examples/demo_pytorch_distributed_rocm.py}
+source "${PROFILER_DIR}/scripts/profile_hook.sh"
 
-profile_run srun singularity exec \
-  --bind "$PWD,$SCRATCH" \
-  --rocm \
-  "$LUMI_CONTAINER_IMAGE" \
-  python "$DEMO" \
-    --seconds 60 \
-    --size 2048 \
-    --dtype fp16
+DEMO="${PROFILER_DIR}/examples/demo_pytorch_distributed_rocm.py"
+
+profile_start
+srun singularity exec \
+  --bind "${PWD}:${PWD}" \
+  --rocm "${LUMI_CONTAINER_IMAGE}" \
+  python3 "${DEMO}" --seconds 60 --size 2048 --dtype fp16
+profile_stop
+profile_summarize
