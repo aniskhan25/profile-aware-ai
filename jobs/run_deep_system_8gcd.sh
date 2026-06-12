@@ -6,7 +6,7 @@
 #SBATCH --ntasks-per-node=8
 #SBATCH --cpus-per-task=7
 #SBATCH --gpus-per-node=8
-#SBATCH --mem=0
+#SBATCH --mem-per-gpu=60G
 #SBATCH --time=00:30:00
 #SBATCH --output=logs/slurm-%j.out
 
@@ -23,13 +23,15 @@ export MIOPEN_USER_DB=$MIOPEN_DIR/config
 export TORCH_HOME="/scratch/${SLURM_JOB_ACCOUNT}/${USER}/torch_home"
 mkdir -p "$TORCH_HOME"
 
-export LUMI_CONTAINER_IMAGE="${LUMI_CONTAINER_IMAGE:-/appl/local/laifs/containers/lumi-multitorch-latest.sif}"
+export LUMI_CONTAINER_IMAGE="${LUMI_CONTAINER_IMAGE:-/appl/local/laifs/containers/lumi-multitorch-u24r70f21m50t210-20260513_121430/lumi-multitorch-full-u24r70f21m50t210-20260513_121430.sif}"
 export LUMI_CONTAINER_USE_ROCM=0
 
 PROFILER_DIR="${PROFILER_DIR:-/scratch/project_462000131/anisrahm/lumi-job-profiler}"
 
-export MASTER_ADDR="${MASTER_ADDR:-$(scontrol show hostnames "${SLURM_JOB_NODELIST}" | head -n 1)}"
-export MASTER_PORT="${MASTER_PORT:-29500}"
+export MASTER_ADDR=$(scontrol show hostnames "${SLURM_JOB_NODELIST}" | head -n 1)
+export MASTER_PORT="1${SLURM_JOB_ID: -4}"
+export WORLD_SIZE=$SLURM_NPROCS
+export LOCAL_WORLD_SIZE=$SLURM_GPUS_PER_NODE
 export LUMI_PROFILE_MODE=deep-system
 export ROCPROFSYS_INSTALL_PREFIX="${ROCPROFSYS_INSTALL_PREFIX:-/scratch/project_462000131/${USER}/tools/rocprofiler-systems-container}"
 
