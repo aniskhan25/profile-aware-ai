@@ -8,6 +8,7 @@
 #SBATCH --gpus-per-node=8
 #SBATCH --mem=0
 #SBATCH --time=00:30:00
+#SBATCH --output=logs/slurm-%j.out
 
 set -euo pipefail
 
