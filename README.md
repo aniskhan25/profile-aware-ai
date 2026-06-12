@@ -56,7 +56,7 @@ The profiling hook and analysis tools live in [lumi-job-profiler](https://github
 git clone https://github.com/aniskhan25/lumi-job-profiler.git /scratch/project_462000131/$USER/lumi-job-profiler
 ```
 
-The demo workloads referenced in the job scripts come from that repository. No additional installation is required.
+The profiling hook and analysis tools live there. The demo workloads are included in this repository under `examples/`.
 
 ## Setup
 
@@ -283,6 +283,7 @@ A self-contained HTML file with time-series plots, per-GPU tables, and the analy
 ## Repository Layout
 
 ```text
+examples/   Demo workloads (single-GPU and distributed)
 jobs/       Slurm job scripts for each profiling level
 logs/       Slurm output directory (created on first submission)
 ```
