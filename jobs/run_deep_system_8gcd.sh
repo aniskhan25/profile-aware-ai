@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name=profile-deep-system-8gcd
 #SBATCH --account=project_462000131
-#SBATCH --partition=small-g
+#SBATCH --partition=dev-g
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=8
 #SBATCH --cpus-per-task=7
