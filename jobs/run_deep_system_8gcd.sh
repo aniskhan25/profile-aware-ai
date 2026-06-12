@@ -34,6 +34,7 @@ ROCM6_SDK_STAGING="/scratch/${SLURM_JOB_ACCOUNT}/${USER}/tools/rocm6sdklibs"
 mkdir -p "$ROCM6_SDK_STAGING"
 cp -n /opt/rocm-6.3.4/lib/librocprofiler-sdk.so.0 "$ROCM6_SDK_STAGING/" 2>/dev/null || true
 cp -n /opt/rocm-6.3.4/lib/libamd_smi.so.25 "$ROCM6_SDK_STAGING/" 2>/dev/null || true
+cp -n /opt/rocm-6.3.4/lib/libamd_comgr.so.2 "$ROCM6_SDK_STAGING/" 2>/dev/null || true
 
 export SINGULARITY_BIND="${SINGULARITY_BIND:+${SINGULARITY_BIND},}/usr/lib64:/opt/hostlibs,${ROCM6_SDK_STAGING}:/opt/rocm6sdklibs"
 export SINGULARITYENV_LD_LIBRARY_PATH="/opt/hostlibs:/opt/rocm6sdklibs"
