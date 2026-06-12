@@ -24,14 +24,12 @@ export MIOPEN_USER_DB=$MIOPEN_DIR/config
 export TORCH_HOME="/scratch/${SLURM_JOB_ACCOUNT}/${USER}/torch_home"
 mkdir -p "$TORCH_HOME"
 
-CONTAINER_IMAGE_DEFAULT="/appl/local/laifs/containers/lumi-multitorch-u24r64f21m43t29-20260225_144743/lumi-multitorch-full-u24r64f21m43t29-20260225_144743.sif"
-export LUMI_CONTAINER_IMAGE="${LUMI_CONTAINER_IMAGE:-${CONTAINER_IMAGE_DEFAULT}}"
+export LUMI_CONTAINER_IMAGE="${LUMI_CONTAINER_IMAGE:-/appl/local/laifs/containers/lumi-multitorch-latest.sif}"
 
-REPO_DIR="${REPO_DIR:-${SLURM_SUBMIT_DIR}}"
 PROFILER_DIR="${PROFILER_DIR:-/scratch/project_462000131/anisrahm/lumi-job-profiler}"
 source "${PROFILER_DIR}/scripts/profile_hook.sh"
 
-DEMO="${REPO_DIR}/examples/demo_pytorch_rocm.py"
+DEMO="${SLURM_SUBMIT_DIR}/examples/demo_pytorch_rocm.py"
 
 profile_run -- python3 "${DEMO}" \
   --seconds 60 \
