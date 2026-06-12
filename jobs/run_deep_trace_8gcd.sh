@@ -24,7 +24,8 @@ export TORCH_HOME="/scratch/${SLURM_JOB_ACCOUNT}/${USER}/torch_home"
 mkdir -p "$TORCH_HOME"
 
 export LUMI_CONTAINER_IMAGE="${LUMI_CONTAINER_IMAGE:-/appl/local/laifs/containers/lumi-multitorch-u24r70f21m50t210-20260513_121430/lumi-multitorch-full-u24r70f21m50t210-20260513_121430.sif}"
-export LUMI_CONTAINER_BIND_EXTRA="/usr/lib64/libdw.so.1:/usr/lib64/libdw.so.1"
+export LUMI_CONTAINER_BIND_EXTRA="/usr/lib64:/usr/lib64"
+export SINGULARITYENV_LD_LIBRARY_PATH="/usr/lib64"
 
 PROFILER_DIR="${PROFILER_DIR:-/scratch/project_462000131/anisrahm/lumi-job-profiler}"
 
