@@ -23,7 +23,7 @@ export MIOPEN_USER_DB=$MIOPEN_DIR/config
 export TORCH_HOME="/scratch/${SLURM_JOB_ACCOUNT}/${USER}/torch_home"
 mkdir -p "$TORCH_HOME"
 
-export LUMI_CONTAINER_IMAGE="${LUMI_CONTAINER_IMAGE:-/appl/local/laifs/containers/lumi-multitorch-u24r70f21m50t210-20260513_121430/lumi-multitorch-full-u24r70f21m50t210-20260513_121430.sif}"
+export LUMI_CONTAINER_IMAGE="${LUMI_CONTAINER_IMAGE:-/appl/local/laifs/containers/lumi-multitorch-latest.sif}"
 export LUMI_CONTAINER_USE_ROCM=0
 export SINGULARITY_BIND="${SINGULARITY_BIND:+${SINGULARITY_BIND},}/usr/lib64:/opt/hostlibs"
 export SINGULARITYENV_LD_LIBRARY_PATH="/opt/hostlibs"
