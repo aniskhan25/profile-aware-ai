@@ -6,10 +6,9 @@ import time
 import torch
 import torch.distributed as dist
 
-SECONDS       = 60
-SIZE          = 2048
-DTYPE         = torch.float16
-SYNC_INTERVAL = 5
+SECONDS = 60
+SIZE    = 2048
+DTYPE   = torch.float16
 
 rank       = int(os.environ["SLURM_PROCID"])
 local_rank = int(os.environ["SLURM_LOCALID"])
@@ -30,21 +29,16 @@ if rank == 0:
 
 a = torch.randn((SIZE, SIZE), device=device, dtype=DTYPE)
 b = torch.randn((SIZE, SIZE), device=device, dtype=DTYPE)
-buf = torch.zeros(1, device=device)
 
 # warmup
 for _ in range(3):
     _ = a @ b
-    dist.all_reduce(buf)
 torch.cuda.synchronize()
 
 start = time.time()
 iters = 0
 while time.time() - start < SECONDS:
     c = a @ b
-    if iters % SYNC_INTERVAL == 0:
-        buf.fill_(1.0)
-        dist.all_reduce(buf)
     torch.cuda.synchronize()
     iters += 1
 
