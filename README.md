@@ -168,24 +168,18 @@ Submit the deep-trace job:
 sbatch jobs/run_deep_trace_8gcd.sh
 ```
 
-Expected output shape:
+Expected output shape at the end of the Slurm log:
 
 ```text
-PROFILE_DIR=$SCRATCH/profile_462000131_<jobid>
-PROFILE_MODE=deep-trace
-
-Top kernels by total time:
-  Kernel                              Calls   Total (ms)   Mean (µs)
-  Cijk_Alik_Bljk_SB_MT128x128...       ...        ...        ...
-  ...
+Deep profile summary: /scratch/project_462000131/<user>/lumi-profile/<jobid>/deep_profile/trace/summary.json
+Deep trace manifest:  /scratch/project_462000131/<user>/lumi-profile/<jobid>/deep_profile/deep_manifest.json
+Profile summary:      /scratch/project_462000131/<user>/lumi-profile/<jobid>/summary.json
+Profile analysis:     /scratch/project_462000131/<user>/lumi-profile/<jobid>/analysis.json
+Profile report:       /scratch/project_462000131/<user>/lumi-profile/<jobid>/report.md
+Profile report:       /scratch/project_462000131/<user>/lumi-profile/<jobid>/report.html
 ```
 
-The full kernel summary is saved in:
-
-```text
-$PROFILE_DIR/deep_trace/kernel_summary.csv
-$PROFILE_DIR/deep_trace/manifest.json
-```
+The deep trace summary contains per-rank kernel stats, top HIP API calls, and top kernel dispatches aggregated across all ranks. The raw per-rank trace CSVs are under `deep_profile/trace/raw/<node>/rank-N/`.
 
 Interpretation:
 
