@@ -25,6 +25,7 @@ export TORCH_HOME="/scratch/${SLURM_JOB_ACCOUNT}/${USER}/torch_home"
 mkdir -p "$TORCH_HOME"
 
 export LUMI_CONTAINER_IMAGE="${LUMI_CONTAINER_IMAGE:-/appl/local/laifs/containers/lumi-multitorch-latest.sif}"
+export LUMI_CONTAINER_USE_ROCM=0
 
 PROFILER_DIR="${PROFILER_DIR:-/scratch/project_462000131/anisrahm/lumi-job-profiler}"
 source "${PROFILER_DIR}/scripts/profile_hook.sh"
