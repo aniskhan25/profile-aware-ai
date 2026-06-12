@@ -101,14 +101,6 @@ Profile report: /scratch/project_462000131/<user>/lumi-profile/<jobid>/report.md
 Profile report: /scratch/project_462000131/<user>/lumi-profile/<jobid>/report.html
 ```
 
-The full summary is saved in:
-
-```text
-$PROFILE_DIR/summary.json
-$PROFILE_DIR/report.html
-$PROFILE_DIR/analysis.json
-```
-
 Copy `report.html` to your local machine to view it in a browser.
 
 Interpretation:
