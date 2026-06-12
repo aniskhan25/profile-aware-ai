@@ -89,16 +89,16 @@ Submit the single-GCD profiling job:
 sbatch jobs/run_light_1gcd.sh
 ```
 
-At the end of the Slurm log, the job prints the profile directory and a compact per-GPU summary.
+At the end of the Slurm log, the job prints the paths to the generated profile artifacts.
 
 Expected output shape:
 
 ```text
-PROFILE_DIR=$SCRATCH/profile_462000131_<jobid>
-PROFILE_MODE=light
-GPUS_SAMPLED=1
-
-GPU 0  util_mean=...%  util_max=...%  mem_used_mean_gb=...  power_mean_w=...
+done iters=... elapsed=60.0s
+Profile summary: /scratch/project_462000131/<user>/lumi-profile/<jobid>/summary.json
+Profile analysis: /scratch/project_462000131/<user>/lumi-profile/<jobid>/analysis.json
+Profile report: /scratch/project_462000131/<user>/lumi-profile/<jobid>/report.md
+Profile report: /scratch/project_462000131/<user>/lumi-profile/<jobid>/report.html
 ```
 
 The full summary is saved in:
@@ -141,14 +141,10 @@ sbatch jobs/run_light_8gcd.sh
 Expected output shape:
 
 ```text
-PROFILE_DIR=$SCRATCH/profile_462000131_<jobid>
-PROFILE_MODE=light
-GPUS_SAMPLED=8
-
-GPU 0  util_mean=...%  util_max=...%  mem_used_mean_gb=...
-GPU 1  util_mean=...%  util_max=...%  mem_used_mean_gb=...
-...
-GPU 7  util_mean=...%  util_max=...%  mem_used_mean_gb=...
+Profile summary: /scratch/project_462000131/<user>/lumi-profile/<jobid>/summary.json
+Profile analysis: /scratch/project_462000131/<user>/lumi-profile/<jobid>/analysis.json
+Profile report: /scratch/project_462000131/<user>/lumi-profile/<jobid>/report.md
+Profile report: /scratch/project_462000131/<user>/lumi-profile/<jobid>/report.html
 ```
 
 A healthy multi-GPU job shows similar `util_mean` values across all GCDs. Spread in those values is a signal worth acting on before scaling further.
